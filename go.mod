@@ -1,4 +1,4 @@
-module nextjs-templater
+module nextui
 
 go 1.25.1
 

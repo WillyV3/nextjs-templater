@@ -18,7 +18,7 @@ import (
 	"github.com/charmbracelet/bubbles/viewport"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"nextjs-templater/internal/templates"
+	"nextui/internal/templates"
 )
 
 type step int
