@@ -2,7 +2,7 @@
   <br/>
   Next.js Templater
 </h1>
-<p align="center">A beautiful TUI to scaffold Next.js projects with shadcn/ui components and authentication.</p>
+<p align="center">TUI to scaffold Next.js projects with shadcn/ui components and authentication.</p>
 
 <p align="center">
 <img width="580" height="440" alt="Screenshot 2025-09-25 at 11 43 37 PM" src="https://github.com/user-attachments/assets/03a3d73f-624d-4b68-9866-ca38afd17acc" />
@@ -18,21 +18,21 @@
 
 ## Features
 
-- **Beautiful TUI** - Built with Bubble Tea for an elegant terminal experience
-- **Responsive Design** - Adapts to your terminal size automatically
-- **Interactive File Browser** - Navigate directories with fuzzy search
+- **TUI** - Built with Bubble Tea framework
+- **Responsive Design** - Adapts to terminal size
+- **File Browser** - Navigate directories with search
 
 <p align="center">
 <img width="596" height="406" alt="Screenshot 2025-09-25 at 11 44 28 PM" src="https://github.com/user-attachments/assets/d4fcaf80-7ec6-4c57-a8d8-21040a6d344e" />
 </p>
 
-- **Multiple Themes** - Choose from various shadcn/ui template configurations
+- **Themes** - Choose from shadcn/ui template configurations
 
 <p align="center">
 <img width="586" height="530" alt="Screenshot 2025-09-25 at 11 45 04 PM" src="https://github.com/user-attachments/assets/855d9852-2c21-43ab-9c13-7588453c6bb4" />
 </p>
 
-- **Authentication Options** - Clerk, Better Auth, or no authentication
+- **Authentication** - Clerk, Better Auth, or no authentication
 
 <p align="center">
 <img width="582" height="341" alt="Screenshot 2025-09-25 at 11 45 42 PM" src="https://github.com/user-attachments/assets/005f7145-2754-4b38-b1bc-f43ebce5efb1" />
@@ -63,24 +63,24 @@ go build -o nextjs-templater
 
 ## How It Works
 
-1. **Enter App Name** - Choose your Next.js app name
-2. **Select Directory** - Browse and select where to create your project
-3. **Choose Theme** - Pick from available shadcn/ui templates
+1. **Enter App Name** - Enter Next.js app name
+2. **Select Directory** - Select directory to create project
+3. **Choose Theme** - Select from shadcn/ui templates
 4. **Select Auth** - Choose Clerk, Better Auth, or skip authentication
-5. **Watch Progress** - Real-time installation with live output
+5. **Monitor Progress** - Installation with output
 
-## Available Templates
+## Templates
 
-- **Default** - Basic Next.js with shadcn/ui
-- **Dashboard** - Admin dashboard template
-- **Landing Page** - Marketing site template
-- **E-commerce** - Online store template
-- **Blog** - Content management template
+- **Default** - Next.js with shadcn/ui
+- **Dashboard** - Dashboard template
+- **Landing Page** - Site template
+- **E-commerce** - Store template
+- **Blog** - Blog template
 
-## Authentication Options
+## Authentication
 
-- **Clerk** - Complete authentication platform with social logins and MFA
-- **Better Auth** - Lightweight auth library with Kysely + SQLite integration
+- **Clerk** - Authentication platform with social logins and MFA
+- **Better Auth** - Auth library with Kysely + SQLite integration
 - **None** - Skip authentication setup
 
 ## Built With
@@ -96,7 +96,7 @@ More from Willy: [www.Willyv3.com](https://www.willyv3.com)
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Submit Pull Requests for contributions.
 
 ## License
 
