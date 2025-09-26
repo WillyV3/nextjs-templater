@@ -25,6 +25,15 @@ import (
 //go:embed asciiArt.txt
 var asciiArtContent string
 
+//go:embed choosedir.txt
+var chooseDirAsciiContent string
+
+//go:embed choosetheme.txt
+var chooseThemeAsciiContent string
+
+//go:embed chooseauth.txt
+var chooseAuthAsciiContent string
+
 //go:embed create-nextjs-shadcn.sh
 var shellScriptContent string
 
@@ -375,6 +384,21 @@ func stripAnsiCodes(input string) string {
 	// Regular expression to match ANSI escape sequences
 	ansiRegex := regexp.MustCompile(`\x1b\[[0-9;]*[a-zA-Z]`)
 	return ansiRegex.ReplaceAllString(input, "")
+}
+
+// getChooseDirAscii returns the embedded ASCII art for the Choose Directory step
+func getChooseDirAscii() string {
+	return chooseDirAsciiContent
+}
+
+// getChooseThemeAscii returns the embedded ASCII art for the Choose Theme step
+func getChooseThemeAscii() string {
+	return chooseThemeAsciiContent
+}
+
+// getChooseAuthAscii returns the embedded ASCII art for the Choose Auth step
+func getChooseAuthAscii() string {
+	return chooseAuthAsciiContent
 }
 
 // getAsciiArt returns the embedded ASCII art with description

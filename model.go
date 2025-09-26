@@ -31,6 +31,19 @@ func (m model) getBorderedTitleStyle() lipgloss.Style {
 		MarginBottom(margin)
 }
 
+// getBorderedTitleStyleCompact returns a bordered title style with reduced padding for ASCII art
+func (m model) getBorderedTitleStyleCompact() lipgloss.Style {
+	return lipgloss.NewStyle().
+		Bold(true).
+		Foreground(lipgloss.Color("86")).
+		Border(lipgloss.ThickBorder()).
+		BorderForeground(lipgloss.Color("#006666")).
+		Width(m.width - 6).
+		Align(lipgloss.Center).
+		Padding(0). // No padding to save vertical space
+		MarginBottom(1)
+}
+
 func (m model) View() string {
 	switch m.step {
 	case stepAppName:
@@ -70,7 +83,15 @@ func (m model) View() string {
 
 	case stepDirectory:
 		var b strings.Builder
-		b.WriteString(m.getBorderedTitleStyle().Render("Choose Directory"))
+		// Use ASCII art if terminal is large enough
+		// The ASCII art is about 74 chars wide and 3 lines tall
+		if m.width >= 80 && m.height >= 25 {
+			// Use compact style (no padding) for ASCII art
+			b.WriteString(m.getBorderedTitleStyleCompact().Render(getChooseDirAscii()))
+		} else {
+			// Use regular style with plain text for small terminals
+			b.WriteString(m.getBorderedTitleStyle().Render("Choose Directory"))
+		}
 		b.WriteString(fmt.Sprintf("\nCurrent: %s\n", m.directory))
 
 		// Show appropriate input based on mode
@@ -204,8 +225,18 @@ func (m model) View() string {
 		return b.String()
 
 	case stepTheme:
+		// Use ASCII art if terminal is large enough
+		var titleSection string
+		if m.width >= 80 && m.height >= 25 {
+			// Use compact style (no padding) for ASCII art
+			titleSection = m.getBorderedTitleStyleCompact().Render(getChooseThemeAscii())
+		} else {
+			// Use regular style with plain text for small terminals
+			titleSection = m.getBorderedTitleStyle().Render("Choose Theme")
+		}
+
 		return fmt.Sprintf("\n%s\n%s\n%s\n\n%s\n\n%s",
-			m.getBorderedTitleStyle().Render("Choose Theme"),
+			titleSection,
 			fmt.Sprintf("Name of your Next.js App: %s", m.appName.Value()),
 			fmt.Sprintf("Parent Directory: %s", m.directory),
 			m.theme.View(),
@@ -213,9 +244,19 @@ func (m model) View() string {
 		)
 
 	case stepAuthChoice:
+		// Use ASCII art if terminal is large enough
+		var titleSection string
+		if m.width >= 80 && m.height >= 25 {
+			// Use compact style (no padding) for ASCII art
+			titleSection = m.getBorderedTitleStyleCompact().Render(getChooseAuthAscii())
+		} else {
+			// Use regular style with plain text for small terminals
+			titleSection = m.getBorderedTitleStyle().Render("Choose Authentication")
+		}
+
 		return fmt.Sprintf(
 			"\n%s\n\n%s\n\n%s",
-			m.getBorderedTitleStyle().Render("Choose Authentication"),
+			titleSection,
 			m.authChoice.View(),
 			"Enter: continue • Esc: back • Ctrl+C: quit",
 		)
