@@ -32,7 +32,7 @@
   <img width="733" height="664" alt="Screenshot 2025-09-26 at 7 26 49 PM" src="https://github.com/user-attachments/assets/2cf1e3a4-41ba-4bac-b3cd-4408b876f69d" />
 </p>
 
-- **Authentication** - Clerk, Better Auth, or no authentication
+- **Authentication** - Clerk, Better Auth, or no authentication (Maybe will add more later, any good ideas?)
 
 <p align="center">
   <img width="713" height="452" alt="Screenshot 2025-09-26 at 7 27 39 PM" src="https://github.com/user-attachments/assets/941f3e9a-1a58-4a39-b830-2de89371dbb7" />
