@@ -23,19 +23,19 @@
 - **File Browser** - Navigate directories with search
 
 <p align="center">
-<img width="596" height="406" alt="Screenshot 2025-09-25 at 11 44 28 PM" src="https://github.com/user-attachments/assets/d4fcaf80-7ec6-4c57-a8d8-21040a6d344e" />
+  <img width="736" height="652" alt="Screenshot 2025-09-26 at 7 26 05 PM" src="https://github.com/user-attachments/assets/7af5ff2d-835c-4773-8e29-88d8752140ec" />
 </p>
 
 - **Themes** - Choose from shadcn/ui template configurations
 
 <p align="center">
-<img width="586" height="530" alt="Screenshot 2025-09-25 at 11 45 04 PM" src="https://github.com/user-attachments/assets/855d9852-2c21-43ab-9c13-7588453c6bb4" />
+  <img width="733" height="664" alt="Screenshot 2025-09-26 at 7 26 49 PM" src="https://github.com/user-attachments/assets/2cf1e3a4-41ba-4bac-b3cd-4408b876f69d" />
 </p>
 
 - **Authentication** - Clerk, Better Auth, or no authentication
 
 <p align="center">
-<img width="582" height="341" alt="Screenshot 2025-09-25 at 11 45 42 PM" src="https://github.com/user-attachments/assets/005f7145-2754-4b38-b1bc-f43ebce5efb1" />
+  <img width="713" height="452" alt="Screenshot 2025-09-26 at 7 27 39 PM" src="https://github.com/user-attachments/assets/941f3e9a-1a58-4a39-b830-2de89371dbb7" />
 </p>
 
 **Installing...**
