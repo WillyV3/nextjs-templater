@@ -5,10 +5,62 @@
 
 set -e
 
-# Switch to Node.js 20
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-nvm use 20
+# Check for required dependencies
+check_dependencies() {
+    local missing_deps=()
+
+    # Check for node
+    if ! command -v node >/dev/null 2>&1; then
+        missing_deps+=("node")
+    fi
+
+    # Check for npm
+    if ! command -v npm >/dev/null 2>&1; then
+        missing_deps+=("npm")
+    fi
+
+    if [ ${#missing_deps[@]} -gt 0 ]; then
+        echo "❌ Missing required dependencies: ${missing_deps[*]}"
+        echo "Please install Node.js and npm before running this script"
+        echo ""
+        echo "Installation options:"
+        echo "  - Ubuntu/Debian: sudo apt install nodejs npm"
+        echo "  - CentOS/RHEL: sudo yum install nodejs npm"
+        echo "  - macOS: brew install node"
+        echo "  - Or download from: https://nodejs.org/"
+        exit 127
+    fi
+}
+
+# Try to use Node.js 20 if NVM is available, otherwise use system Node.js
+setup_node() {
+    echo "🔍 Checking Node.js setup..."
+
+    # Try NVM first (common on macOS/Linux development environments)
+    if [ -s "$HOME/.nvm/nvm.sh" ]; then
+        echo "📦 Found NVM, attempting to use Node.js 20..."
+        export NVM_DIR="$HOME/.nvm"
+        \. "$NVM_DIR/nvm.sh"
+
+        # Try to use Node 20, but don't fail if it's not available
+        if nvm use 20 2>/dev/null; then
+            echo "✅ Using Node.js 20 via NVM"
+        else
+            echo "⚠️  Node.js 20 not available via NVM, using system Node.js"
+        fi
+    else
+        echo "📦 NVM not found, using system Node.js"
+    fi
+
+    # Show current Node.js version
+    echo "📍 Node.js version: $(node --version)"
+    echo "📍 npm version: $(npm --version)"
+    echo ""
+}
+
+# Run dependency checks
+check_dependencies
+setup_node
 
 PROJECT_NAME="${1:-}"
 PROJECT_PATH="${2:-$(pwd)}"
@@ -34,31 +86,52 @@ FULL_PATH="$PROJECT_PATH/$PROJECT_NAME"
 echo "Creating: $PROJECT_NAME at $FULL_PATH"
 
 # Create Next.js 15 app with Tailwind v4
+echo "🚀 Creating Next.js app..."
 cd "$PROJECT_PATH"
-echo "n" | npx create-next-app@latest "$PROJECT_NAME" \
+
+if ! echo "n" | npx create-next-app@latest "$PROJECT_NAME" \
     --typescript \
     --tailwind \
     --eslint \
     --app \
     --src-dir \
-    --turbopack
+    --turbopack; then
+    echo "❌ Failed to create Next.js app. Check your internet connection and try again."
+    exit 1
+fi
+
+if [ ! -d "$FULL_PATH" ]; then
+    echo "❌ Project directory was not created: $FULL_PATH"
+    exit 1
+fi
 
 cd "$FULL_PATH"
+echo "✅ Next.js app created successfully"
 
 # Init shadcn and apply theme if specified
 if [ ! -z "$THEME" ]; then
-    echo "Initializing shadcn with $THEME theme..."
+    echo "🎨 Initializing shadcn with $THEME theme..."
     # Run the theme command twice - first time inits shadcn, second applies theme
-    yes | npx shadcn@latest add "https://tweakcn.com/r/themes/${THEME}.json"
-    yes | npx shadcn@latest add "https://tweakcn.com/r/themes/${THEME}.json"
+    if ! yes | npx shadcn@latest add "https://tweakcn.com/r/themes/${THEME}.json"; then
+        echo "❌ Failed to initialize shadcn with theme. Falling back to default..."
+        printf "1\n1\n" | npx shadcn@latest init || { echo "❌ Failed to initialize shadcn"; exit 1; }
+    else
+        echo "🎨 Applying theme configuration..."
+        yes | npx shadcn@latest add "https://tweakcn.com/r/themes/${THEME}.json" || echo "⚠️  Theme reapplication failed, but continuing..."
+    fi
 else
-    echo "Initializing shadcn..."
-    printf "1\n1\n" | npx shadcn@latest init
+    echo "🎨 Initializing shadcn with default theme..."
+    if ! printf "1\n1\n" | npx shadcn@latest init; then
+        echo "❌ Failed to initialize shadcn"
+        exit 1
+    fi
 fi
 
 # Add all components with auto-yes
-echo "Installing all shadcn components..."
-yes | npx shadcn@latest add --all
+echo "📦 Installing all shadcn components..."
+if ! yes | npx shadcn@latest add --all; then
+    echo "⚠️  Some components may have failed to install, but continuing..."
+fi
 
 # Add authentication if requested
 if [ "$USE_CLERK" = "true" ]; then
