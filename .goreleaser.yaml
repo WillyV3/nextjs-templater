@@ -1,0 +1,77 @@
+project_name: nextui
+
+before:
+  hooks:
+    - go mod tidy
+    - go generate ./...
+
+builds:
+  - id: nextui
+    binary: nextui
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - "386"
+      - amd64
+      - arm64
+    ignore:
+      - goos: darwin
+        goarch: "386"
+    ldflags:
+      - -s -w -X main.version={{.Version}}
+
+archives:
+  - id: nextui
+    format: tar.gz
+    name_template: >-
+      {{ .ProjectName }}_
+      {{- title .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+    format_overrides:
+      - goos: windows
+        format: zip
+
+checksum:
+  name_template: 'checksums.txt'
+
+snapshot:
+  name_template: "{{ incpatch .Version }}-next"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+
+brews:
+  - name: nextui
+    repository:
+      owner: WillyV3
+      name: homebrew-tap
+    homepage: "https://github.com/WillyV3/nextjs-templater"
+    description: "TUI to scaffold Next.js projects with shadcn/ui components and authentication"
+    license: "MIT"
+    dependencies:
+      - node
+    install: |
+      bin.install "nextui"
+      bin.install "create-nextjs-shadcn.sh"
+      share.install "asciiArt.txt"
+
+release:
+  name_template: "{{.ProjectName}}-v{{.Version}}"
+
+metadata:
+  mod_timestamp: "{{ .CommitTimestamp }}"
+
+# Author information
+authors:
+  - name: "William Vansickle"
+    email: "vansicklewilly@gmail.com"
