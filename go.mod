@@ -1,4 +1,4 @@
-module nextui
+module github.com/WillyV3/nextjs-templater
 
 go 1.25.1
 

@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	_ "embed"
 	"fmt"
 	"io"
 	"os"
@@ -18,8 +19,14 @@ import (
 	"github.com/charmbracelet/bubbles/viewport"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"nextui/internal/templates"
+	"github.com/WillyV3/nextjs-templater/internal/templates"
 )
+
+//go:embed asciiArt.txt
+var asciiArtContent string
+
+//go:embed create-nextjs-shadcn.sh
+var shellScriptContent string
 
 type step int
 
@@ -370,13 +377,10 @@ func stripAnsiCodes(input string) string {
 	return ansiRegex.ReplaceAllString(input, "")
 }
 
-// getAsciiArt reads and returns the ASCII art from file with description
+// getAsciiArt returns the embedded ASCII art with description
 func getAsciiArt() string {
-	content, err := os.ReadFile("asciiArt.txt")
-	if err != nil {
-		// Fallback to text if file not found
-		return "Next.js + Shadcn/ui Project Generator"
-	}
+	// Use embedded content - always available
+	content := asciiArtContent
 
 	// Add description below the ASCII art
 	developerStyle := lipgloss.NewStyle().
@@ -384,13 +388,14 @@ func getAsciiArt() string {
 		Align(lipgloss.Center)
 	developerText := developerStyle.Render("Developer: WillyV3\nMore from Willy: www.Willyv3.com")
 
-	fullContent := string(content) + "\n" +
+	fullContent := content + "\n" +
 		"Scaffold your NextJS App with Complete Shadcn\n" +
 		"Component Kit and Choice of Auth\n\n" +
 		developerText
 
 	return fullContent
 }
+
 
 type progressMsg float64
 
@@ -412,43 +417,51 @@ func runScript(appName, directory, theme string, useClerk, useBetterAuth bool) t
 			}
 		}
 
-		// Get the absolute path to the script
-		execPath, _ := os.Executable()
-		scriptDir := filepath.Dir(execPath)
-		scriptPath := filepath.Join(scriptDir, "create-nextjs-shadcn.sh")
-
-		// If running with go run, the script is in the current working directory
-		if _, err := os.Stat(scriptPath); os.IsNotExist(err) {
-			wd, _ := os.Getwd()
-			scriptPath = filepath.Join(wd, "create-nextjs-shadcn.sh")
-		}
-
-		// Replace placeholders in command args and add Clerk parameter
-		args := strings.Replace(selectedTemplate.CommandArgs, "create-nextjs-shadcn.sh", scriptPath, 1)
-		args = strings.Replace(args, "$(pwd)", directory, -1)
-		args = strings.Replace(args, selectedTemplate.Title, appName, -1)
-
-		// Add auth parameters
-		if useClerk {
-			args += " true false"
-		} else if useBetterAuth {
-			args += " false true"
-		} else {
-			args += " false false"
-		}
-
 		// Clear the live output buffer
 		liveOutputBuf.Reset()
-
 		var outputBuffer strings.Builder
 
-		// Log the command being executed
-		initialMsg := fmt.Sprintf("Executing: %s %s\nWorking directory: %s\n\n", selectedTemplate.Command, args, directory)
+		// Check if bash exists
+		if _, err := exec.LookPath("bash"); err != nil {
+			errorMsg := fmt.Sprintf("❌ DEPENDENCY ERROR: bash not found in PATH\nError: %v\n", err)
+			outputBuffer.WriteString(errorMsg)
+			return completeMsg{
+				output: outputBuffer.String(),
+				err:    fmt.Errorf("bash not found: %w", err),
+			}
+		}
+
+		// Check if node exists
+		if _, err := exec.LookPath("node"); err != nil {
+			warningMsg := fmt.Sprintf("⚠️  WARNING: node not found in PATH\nError: %v\nScript may fail if Node.js is required\n\n", err)
+			outputBuffer.WriteString(warningMsg)
+			liveOutputBuf.WriteString(warningMsg)
+		}
+
+
+		// Extract theme name from template title (remove "nextjs-" prefix)
+		themeName := ""
+		if selectedTemplate.Id != 0 { // not nextjs-default
+			themeName = strings.TrimPrefix(selectedTemplate.Title, "nextjs-")
+		}
+
+		// Log execution info
+		initialMsg := fmt.Sprintf("=== EXECUTION INFO ===\nTheme: %s\nApp name: %s\nDirectory: %s\nAuth: Clerk=%t, BetterAuth=%t\nTheme name: %s\n\n",
+			selectedTemplate.Title,
+			appName,
+			directory,
+			useClerk,
+			useBetterAuth,
+			themeName)
 		outputBuffer.WriteString(initialMsg)
 		liveOutputBuf.WriteString(initialMsg)
 
-		executing = exec.Command(selectedTemplate.Command, strings.Fields(args)...)
+		// Execute the embedded script by piping it to bash with arguments
+		executing = exec.Command("bash", "-s", "--", appName, directory, themeName, fmt.Sprintf("%t", useClerk), fmt.Sprintf("%t", useBetterAuth))
 		executing.Dir = directory
+
+		// Pipe the embedded script to stdin
+		executing.Stdin = strings.NewReader(shellScriptContent)
 
 		// Use MultiWriter to write to both the final output buffer and the live buffer
 		executing.Stdout = io.MultiWriter(&outputBuffer, &liveOutputBuf)
@@ -456,6 +469,15 @@ func runScript(appName, directory, theme string, useClerk, useBetterAuth bool) t
 
 		// Run the command
 		err := executing.Run()
+
+		// Add execution result info
+		if err != nil {
+			errorMsg := fmt.Sprintf("\n❌ EXECUTION FAILED: %v\n", err)
+			outputBuffer.WriteString(errorMsg)
+		} else {
+			successMsg := "\n✅ EXECUTION COMPLETED SUCCESSFULLY\n"
+			outputBuffer.WriteString(successMsg)
+		}
 
 		return completeMsg{
 			output: outputBuffer.String(),
