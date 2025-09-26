@@ -22,19 +22,19 @@ import (
 	"github.com/WillyV3/nextjs-templater/internal/templates"
 )
 
-//go:embed asciiArt.txt
+//go:embed ascii/asciiArt.txt
 var asciiArtContent string
 
-//go:embed choosedir.txt
+//go:embed ascii/choosedir.txt
 var chooseDirAsciiContent string
 
-//go:embed choosetheme.txt
+//go:embed ascii/choosetheme.txt
 var chooseThemeAsciiContent string
 
-//go:embed chooseauth.txt
+//go:embed ascii/chooseauth.txt
 var chooseAuthAsciiContent string
 
-//go:embed create-nextjs-shadcn.sh
+//go:embed script/create-nextjs-shadcn.sh
 var shellScriptContent string
 
 type step int
