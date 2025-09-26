@@ -125,7 +125,17 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				// Normal directory navigation
 				switch msg.String() {
 				case "enter":
-					// Select current directory and proceed to theme selection
+					// Check if we have a valid selection and it's a directory
+					if m.cursor < len(m.filteredFiles) {
+						entry := m.filteredFiles[m.cursor]
+						if entry.IsDir {
+							// Navigate into the selected directory AND go to theme selection (like new dir creation)
+							m.loadDirectory(entry.Path)
+							m.step = stepTheme
+							return m, nil
+						}
+					}
+					// If no directory selected or selection is not a directory, proceed to theme selection
 					m.step = stepTheme
 					return m, nil
 				case "right":
