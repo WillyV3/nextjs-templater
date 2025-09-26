@@ -3,7 +3,7 @@
   Next.js Templater
 </h1>
 <p align="center">A beautiful TUI to scaffold Next.js projects with shadcn/ui components and authentication.</p>
-<img width="580" height="440" alt="Screenshot 2025-09-25 at 11 43 37 PM" src="https://github.com/user-attachments/assets/03a3d73f-624d-4b68-9866-ca38afd17acc" />
+<img width="580" height="440" align="center" alt="Screenshot 2025-09-25 at 11 43 37 PM" src="https://github.com/user-attachments/assets/03a3d73f-624d-4b68-9866-ca38afd17acc" />
 
 <p align="center">
     <img src="https://img.shields.io/badge/Go-1.21+-00ADD8?style=for-the-badge&logo=go" alt="go version" />
@@ -18,16 +18,16 @@
 - **Beautiful TUI** - Built with Bubble Tea for an elegant terminal experience
 - **Responsive Design** - Adapts to your terminal size automatically
 - **Interactive File Browser** - Navigate directories with fuzzy search
-<img width="596" height="406" alt="Screenshot 2025-09-25 at 11 44 28 PM" src="https://github.com/user-attachments/assets/d4fcaf80-7ec6-4c57-a8d8-21040a6d344e" />
+<img width="596" height="406" align="center" alt="Screenshot 2025-09-25 at 11 44 28 PM" src="https://github.com/user-attachments/assets/d4fcaf80-7ec6-4c57-a8d8-21040a6d344e" />
 
 - **Multiple Themes** - Choose from various shadcn/ui template configurations
-<img width="586" height="530" alt="Screenshot 2025-09-25 at 11 45 04 PM" src="https://github.com/user-attachments/assets/855d9852-2c21-43ab-9c13-7588453c6bb4" />
+<img width="586" height="530" align="center" alt="Screenshot 2025-09-25 at 11 45 04 PM" src="https://github.com/user-attachments/assets/855d9852-2c21-43ab-9c13-7588453c6bb4" />
 
 - **Authentication Options** - Clerk, Better Auth, or no authentication
-<img width="582" height="341" alt="Screenshot 2025-09-25 at 11 45 42 PM" src="https://github.com/user-attachments/assets/005f7145-2754-4b38-b1bc-f43ebce5efb1" />
+<img width="582" height="341"  align="center" alt="Screenshot 2025-09-25 at 11 45 42 PM" src="https://github.com/user-attachments/assets/005f7145-2754-4b38-b1bc-f43ebce5efb1" />
 
 **Installing...**
-<img width="599" height="533" alt="Screenshot 2025-09-25 at 11 46 28 PM" src="https://github.com/user-attachments/assets/31f688af-00db-4341-a9d3-8bceff24bb69" />
+<img width="599" height="533" align="center" alt="Screenshot 2025-09-25 at 11 46 28 PM" src="https://github.com/user-attachments/assets/31f688af-00db-4341-a9d3-8bceff24bb69" />
 
 
 ## Prerequisites
