@@ -9,3 +9,4 @@ coverage.out
 .DS_Store
 dist/
 setup-release.sh
+release.sh
