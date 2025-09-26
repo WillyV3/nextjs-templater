@@ -38,7 +38,7 @@
 <img width="582" height="341" alt="Screenshot 2025-09-25 at 11 45 42 PM" src="https://github.com/user-attachments/assets/005f7145-2754-4b38-b1bc-f43ebce5efb1" />
 </p>
 
-**Installing...**
+**Installing...**kmkmkm
 
 <p align="center">
 <img width="599" height="533" alt="Screenshot 2025-09-25 at 11 46 28 PM" src="https://github.com/user-attachments/assets/31f688af-00db-4341-a9d3-8bceff24bb69" />
