@@ -16,6 +16,21 @@
     <img src="https://img.shields.io/badge/license-mit-green?style=for-the-badge&logo=none" alt="license" />
 </p>
 
+## Justification
+
+### I built this for several reasons (Not in order of importance);
+
+1. Im learning how to build apps in GO 
+2. CharmBracelet gives you a lot of tools to do that and learn how to do that well (I think?)
+3. I make a lot of Next.js projects, I spend a lot of time looking up commands and trying to remember how to install stuff. 
+4. Wanted to see how BetterAuth devx was, I use Clerk for most of my apps auth - no real opinions, I just like it and easy to use. 
+5. Ummm, yeah, building TUI's is fun. thanks if you read this much.
+
+     Stayed tuned for me building more shit            ^   ^
+                                                      () ()
+                                                     O:
+                                                     |___|
+                   
 ## Features
 
 - **TUI** - Built with Bubble Tea framework
@@ -44,23 +59,58 @@
 <img width="599" height="533" alt="Screenshot 2025-09-25 at 11 46 28 PM" src="https://github.com/user-attachments/assets/31f688af-00db-4341-a9d3-8bceff24bb69" />
 </p>
 
+## Installation
+
+### Option 1: Homebrew (Recommended)
+```bash
+brew install willyv3/tap/nextui
+```
+
+### Option 2: Go Install
+```bash
+go install github.com/WillyV3/nextjs-templater@latest
+```
+
+### Option 3: Download Binary
+```bash
+# macOS (Apple Silicon)
+curl -L https://github.com/WillyV3/nextjs-templater/releases/latest/download/nextui-darwin-arm64.tar.gz | tar xz
+sudo mv nextui /usr/local/bin/
+
+# macOS (Intel)
+curl -L https://github.com/WillyV3/nextjs-templater/releases/latest/download/nextui-darwin-amd64.tar.gz | tar xz
+sudo mv nextui /usr/local/bin/
+
+# Linux
+curl -L https://github.com/WillyV3/nextjs-templater/releases/latest/download/nextui-linux-amd64.tar.gz | tar xz
+sudo mv nextui /usr/local/bin/
+```
+
+### Option 4: Build from Source
+```bash
+git clone https://github.com/WillyV3/nextjs-templater
+cd nextjs-templater
+go build -o nextui
+sudo mv nextui /usr/local/bin/
+```
+
 ## Prerequisites
 
-- Go 1.21+
-- Node.js and npm (for the generated projects)
-
+- Node.js 18+ and npm (for the generated Next.js projects)
+- Git (for project initialization)
 
 ## Quick Start
 
+After installation, simply run:
 ```bash
-# Clone and build
-git clone https://github.com/WillyV3/nextjs-templater
-cd nextjs-templater
-go build -o nextjs-templater
-
-# Run the TUI
-./nextjs-templater
+nextui
 ```
+
+If running locally for dev you can use: 
+
+go build . 
+
+go run . 
 
 ## How It Works
 
