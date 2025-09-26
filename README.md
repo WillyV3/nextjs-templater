@@ -26,10 +26,12 @@
 4. Wanted to see how BetterAuth devx was, I use Clerk for most of my apps auth - no real opinions, I just like it and easy to use. 
 5. Ummm, yeah, building TUI's is fun. thanks if you read this much.
 
-     Stayed tuned for me building more shit            ^   ^
-                                                      () ()
-                                                     O:
-                                                     |___|
+Stayed tuned for me building more shit  
+
+ ^   ^
+() ()
+O:
+|___|
                    
 ## Features
 
