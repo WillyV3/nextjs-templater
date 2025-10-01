@@ -1,6 +1,6 @@
 {
   "name": "nextjs-templater",
-  "version": "0.1.45",
+  "version": "0.1.46",
   "description": "github.com/WillyV3/nextjs-templater - distributed via distui",
   "bin": {
     "nextjs-templater": "./bin/nextjs-templater"
