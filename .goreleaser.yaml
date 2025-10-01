@@ -54,6 +54,3 @@ brews:
     test: |
       system "#{bin}/github.com/WillyV3/nextjs-templater", "--version"
 
-# NPM publishing requires package.json in repo
-# Run 'distui generate package.json' if not present
-
