@@ -76,7 +76,10 @@ if [ -z "$PROJECT_NAME" ]; then
     echo "  doom-64, kodama-grove, cosmic-night, quantum-rose, bold-tech,"
     echo "  elegant-luxury, amber-minimal, neo-brutalism, solar-dusk, pastel-dreams,"
     echo "  clean-slate, ocean-breeze, retro-arcade, midnight-bloom, northern-lights,"
-    echo "  vintage-paper, sunset-horizon, starry-night, soft-pop"
+    echo "  vintage-paper, sunset-horizon, starry-night, soft-pop, bubblegum,"
+    echo "  caffeine, candyland, catppuccin, claude, claymorphism, cyberpunk,"
+    echo "  darkmatter, nature, notebook, perpetuity, supabase, tangerine,"
+    echo "  twitter, vercel"
     exit 1
 fi
 

@@ -1,0 +1,28 @@
+{
+  "name": "nextjs-templater",
+  "version": "0.1.46",
+  "description": "github.com/WillyV3/nextjs-templater - distributed via distui",
+  "bin": {
+    "nextjs-templater": "./bin/nextjs-templater"
+  },
+  "scripts": {
+    "postinstall": "golang-npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WillyV3/nextjs-templater.git"
+  },
+  "keywords": [
+    "cli",
+    "tool"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "golang-npm": "^0.0.6"
+  },
+  "goBinary": {
+    "name": "nextjs-templater",
+    "path": "./bin",
+    "url": "https://github.com/WillyV3/nextjs-templater/releases/download/v{{version}}/nextjs-templater_{{version}}_{{platform}}_{{arch}}.tar.gz"
+  }
+}
